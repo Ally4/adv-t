@@ -10,17 +10,17 @@ const swaggerOptions = {
     servers: [
       {
         url: 'http://localhost:1234',
-        name: `${os.hostname()}`
+        name: `${os.hostname()}`,
       },
       {
         url: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com`,
-        name: `${os.hostname()}`
-      }
-    ]
+        name: `${os.hostname()}`,
+      },
+    ],
   },
   apis: [
-    path.resolve(__dirname, '../routes/*.js')
+    path.resolve(__dirname, '../routes/*.js'),
   ],
-}
+};
 
-export default swaggerOptions
+export default swaggerOptions;

@@ -1,12 +1,12 @@
-import bcrypt from "bcryptjs";
-import bcrypts from "bcrypt";
+import bcrypt from 'bcryptjs';
+import bcrypts from 'bcrypt';
 
-import Model from "../database/models";
-import { cryptionToken, decryptionToken } from "../utils/jsonwebtoken";
-import emails from "../utils/sendEmail";
-import pwd from "../utils/randomPassword";
-import theRole from "../utils/defaultRole";
-import messages from "../mocks/mockMessages";
+import Model from '../database/models';
+import { cryptionToken, decryptionToken } from '../utils/jsonwebtoken';
+import emails from '../utils/sendEmail';
+import pwd from '../utils/randomPassword';
+import theRole from '../utils/defaultRole';
+import messages from '../mocks/mockMessages';
 
 const { User } = Model;
 
@@ -21,19 +21,19 @@ class userController {
         lastname: req.body.lastname,
         email: req.body.email,
         password: hashed,
-        role: role,
+        role,
         dateofbirth: req.body.dateofbirth,
         gender: req.body.gender,
       };
 
-      const email = req.body.email;
+      const { email } = req.body;
       const doesExist = await User.findOne({
         where: { email },
       });
       if (doesExist) {
         res.status(409).json({
           status: 409,
-          message: "User with the provided email is already registered.",
+          message: 'User with the provided email is already registered.',
         });
         return false;
       }
@@ -44,17 +44,17 @@ class userController {
         email: user.email,
         role: user.role,
         dateofbirth: user.dateofbirth,
-        gender: user.gender
-      }
+        gender: user.gender,
+      };
       const toSend = {
         userEmail: `${email}`,
-        subject: "Registration at advertise",
+        subject: 'Registration at advertise',
         message: messages.signupEmail(email, rawPassword),
       };
       emails.sendEmail(toSend);
       return res.status(201).json({
         status: 201,
-        message: "Inserted in the system successfully",
+        message: 'Inserted in the system successfully',
         newUser,
       });
     } catch (error) {
@@ -76,21 +76,21 @@ class userController {
 
     if (!user || !bcrypt.compareSync(password, user.password)) {
       return res.status(401).send({
-        status:401,
-        message: "Your email or must password must be wrong",
+        status: 401,
+        message: 'Your email or must password must be wrong',
       });
     }
     const token = cryptionToken({ id: user.id });
 
     await User.update(
       { isLoggedIn: true },
-      { where: { email: req.body.email } }
+      { where: { email: req.body.email } },
     );
 
     user.password = undefined;
     res.status(200).json({
       status: 200,
-      message: "Logged in successfully",
+      message: 'Logged in successfully',
       Token: token,
     });
   }

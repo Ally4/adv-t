@@ -1,14 +1,13 @@
-import express from "express";
-import routes from './routes/index'
-// import i18n from './language/languageConfig'
-import cors from 'cors'
+import express from 'express';
+import cors from 'cors';
 import bodyParser from 'body-parser';
+
+import routes from './routes/index';
 
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors());
-
 
 app.use(routes);
 

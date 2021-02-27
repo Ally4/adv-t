@@ -1,10 +1,9 @@
-import express from "express";
-import userController from "../controllers/userController";
-import { registrationValidationError } from "../validators/signupValidation";
-import { loginValidationError } from "../validators/loginValidation";
+import express from 'express';
+import userController from '../controllers/userController';
+import { registrationValidationError } from '../validators/signupValidation';
+import { loginValidationError } from '../validators/loginValidation';
 
-const router = express(); 
-
+const router = express();
 
 /**
  * @swagger
@@ -39,7 +38,7 @@ const router = express();
  *    400:
  *     description: Invalid inputs
  */
-router.post("/register", registrationValidationError, userController.register);
+router.post('/register', registrationValidationError, userController.register);
 
 /**
  * @swagger
@@ -67,6 +66,6 @@ router.post("/register", registrationValidationError, userController.register);
  *    401:
  *     description: Invalid email and password
  */
-router.post("/login", loginValidationError, userController.login);
+router.post('/login', loginValidationError, userController.login);
 
 export default router;

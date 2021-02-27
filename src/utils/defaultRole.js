@@ -1,4 +1,4 @@
 exports.generateDefault = () => {
-     let role = "user"
-     return role
-}
+  const role = 'user';
+  return role;
+};
