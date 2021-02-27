@@ -8,8 +8,11 @@
     "seeding": "npx sequelize-cli db:seed:all",
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
     "migrateDB": "npx sequelize-cli db:migrate:undo:all && npm run migrate && npm run seeding",
-    "build": "babel src --out-dir dist --source-maps inline --copy-files",
-    "start": "npm run migrateDB && npm run build && node --require @babel/polyfill ./dist/app.js",
+    "migrate:heroku": "npm run migrate:reset && npm run seed",
+    "clean": "rm -rf build && mkdir build",
+    "build-src": "babel -d ./build ./src -s",
+    "build": "npm run migrate:heroku && npm run clean && npm run build-src",
+    "start": "node --require @babel/polyfill build/app.js",
     "dev": "nodemon --exec babel-node ./src/app.js"
   },
   "repository": {
