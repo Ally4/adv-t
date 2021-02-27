@@ -14,7 +14,7 @@ class userController {
   static async register(req, res) {
     try {
       const rawPassword = pwd.generatePassword();
-      const hashed = await bcrypts.hash(rawPassword, 12);
+      const hashed = await bcrypts.hash(req.body.password, 12);
       const role = await theRole.generateDefault();
       const theUser = {
         firstname: req.body.firstname,
@@ -25,7 +25,7 @@ class userController {
         dateofbirth: req.body.dateofbirth,
         gender: req.body.gender,
       };
-
+      
       const { email } = req.body;
       const doesExist = await User.findOne({
         where: { email },
