@@ -25,7 +25,7 @@ class userController {
         dateofbirth: req.body.dateofbirth,
         gender: req.body.gender,
       };
-      
+
       const { email } = req.body;
       const doesExist = await User.findOne({
         where: { email },
@@ -46,12 +46,12 @@ class userController {
         dateofbirth: user.dateofbirth,
         gender: user.gender,
       };
-      const toSend = {
-        userEmail: `${email}`,
-        subject: 'Registration at advertise',
-        message: messages.signupEmail(email, rawPassword),
-      };
-      emails.sendEmail(toSend);
+      // const toSend = {
+      //   userEmail: `${email}`,
+      //   subject: 'Registration at advertise',
+      //   message: messages.signupEmail(email, rawPassword),
+      // };
+      // emails.sendEmail(toSend);
       return res.status(201).json({
         status: 201,
         message: 'Inserted in the system successfully',
