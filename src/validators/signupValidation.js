@@ -4,7 +4,6 @@ export const signup = Joi.object().keys({
   firstname: Joi.string().min(5).max(15).required(),
   lastname: Joi.string().min(5).max(15).required(),
   email: Joi.string().email().required(),
-  password: Joi.string().min(5).max(15).required(),
   dateofbirth: Joi.string().min(5).max(15).required(),
   gender: Joi.string().min(3).max(15).required(),
 }).options({ abortEarly: false });
