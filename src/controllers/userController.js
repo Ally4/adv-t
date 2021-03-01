@@ -14,7 +14,7 @@ class userController {
   static async register(req, res) {
     try {
       const rawPassword = pwd.generatePassword();
-      const hashed = await bcrypts.hash(req.body.password, 12);
+      const hashed = await bcrypts.hash(rawPassword, 12);
       const role = await theRole.generateDefault();
       const theUser = {
         firstname: req.body.firstname,
@@ -46,12 +46,12 @@ class userController {
         dateofbirth: user.dateofbirth,
         gender: user.gender,
       };
-      // const toSend = {
-      //   userEmail: `${email}`,
-      //   subject: 'Registration at advertise',
-      //   message: messages.signupEmail(email, rawPassword),
-      // };
-      // emails.sendEmail(toSend);
+      const toSend = {
+        userEmail: `${email}`,
+        subject: 'Registration at advertise',
+        message: messages.signupEmail(email, rawPassword),
+      };
+      emails.sendEmail(toSend);
       return res.status(201).json({
         status: 201,
         message: 'Inserted in the system successfully',

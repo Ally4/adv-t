@@ -27,8 +27,6 @@ const router = express();
  *         type: string
  *        email:
  *         type: string
- *        password:
- *         type: string
  *        dateofbirth:
  *         type: string
  *         format: date
