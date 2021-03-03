@@ -68,4 +68,26 @@ router.post('/register', registrationValidationError, userController.register);
  */
 router.post('/login', loginValidationError, userController.login);
 
+/**
+ * @swagger
+ *
+ * /api/v1/auth/logout:
+ *  post:
+ *    summary: Logout
+ *    description: Logs out an authenticated user
+ *    tags:
+ *    - User
+ *    parameters:
+ *    - in: header
+ *      name: Authorization
+ *      required: true
+ *      type: string
+ *      description: token to authorize
+ *    responses:
+ *     200:
+ *      description:Logged out sucessfully
+ */
+
+router.post('/logout', userController.logout);
+
 export default router;

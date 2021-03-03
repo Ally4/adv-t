@@ -54,7 +54,7 @@ class userController {
       emails.sendEmail(toSend);
       return res.status(201).json({
         status: 201,
-        message: 'Inserted in the system successfully',
+        message: 'Inserted in the system successfully, checkin your email for the password on login',
         newUser,
       });
     } catch (error) {
@@ -88,11 +88,41 @@ class userController {
     );
 
     user.password = undefined;
-    res.status(200).json({
+    return res.status(200).json({
       status: 200,
       message: 'Logged in successfully',
       Token: token,
     });
+  }
+
+  static async logout(req, res) {
+    try {
+      if (req.user.isLoggedIn == true) {
+        await User.update(
+          { isLoggedIn: false },
+          { where: { email: req.user.email } },
+        );
+        const user = await User.findOne({
+          where: {
+            email: req.user.email,
+          },
+        });
+
+        const { isLoggedIn } = user;
+        return res.status(200).json({
+          message: 'Logout successfully',
+          isLoggedIn,
+        });
+      }
+      return res.status(200).json({
+        message: "You're not logged in",
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: error.message,
+      });
+    }
   }
 }
 
