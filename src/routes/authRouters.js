@@ -2,6 +2,7 @@ import express from 'express';
 import userController from '../controllers/userController';
 import { registrationValidationError } from '../validators/signupValidation';
 import { loginValidationError } from '../validators/loginValidation';
+import middleware from '../middleware/protectRoutes';
 
 const router = express();
 
@@ -88,6 +89,6 @@ router.post('/login', loginValidationError, userController.login);
  *      description:Logged out sucessfully
  */
 
-router.post('/logout', userController.logout);
+router.post('/logout', middleware.protect, userController.logout);
 
 export default router;

@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import bcrypts from 'bcrypt';
 
 import Model from '../database/models';
-import { cryptionToken, decryptionToken } from '../utils/jsonwebtoken';
+import { cryptionToken } from '../utils/jsonwebtoken';
 import emails from '../utils/sendEmail';
 import pwd from '../utils/randomPassword';
 import theRole from '../utils/defaultRole';
@@ -24,6 +24,7 @@ class userController {
         role,
         dateofbirth: req.body.dateofbirth,
         gender: req.body.gender,
+        isLoggedIn: false,
       };
 
       const { email } = req.body;
@@ -97,7 +98,7 @@ class userController {
 
   static async logout(req, res) {
     try {
-      if (req.user.isLoggedIn == true) {
+      if (req.user.isLoggedIn === true) {
         await User.update(
           { isLoggedIn: false },
           { where: { email: req.user.email } },

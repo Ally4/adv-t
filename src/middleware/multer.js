@@ -5,14 +5,14 @@ const storage = multer.diskStorage({
     callback(null, './src/uploadedFile');
   },
   filename: (req, file, callback) => {
-    callback(null, file.originalname + 'uploadedWell');
+    callback(null, `${file.originalname}uploadedWell`);
   },
 });
 
 const theUploads = multer({
-  storage: storage,
+  storage,
 });
 
-const InUploads = theUploads.fields([{ name: 'theImage', maxCount: 2 } ]);
+const InUploads = theUploads.fields([{ name: 'theImage', maxCount: 2 }]);
 
 export default InUploads;

@@ -1,19 +1,11 @@
 import Joi from 'joi';
 import ResponseUtil from '../utils/response.util';
 
-export const advertise = Joi.object().keys({
-  // owner: Joi.string().min(5).max(15).required()
-  //   .messages({
-  //     'any.required': 'Owner is required',
-  //     'string.empty': 'Owner is not allowed to be empty',
-  //   }),
-  // type: Joi.string().min(5).max(15).required(),
-  // nameofproduct: Joi.string().email().required(),
-  // price: Joi.string().min(3).max(15).required(),
+export const advertise = Joi.object.keys({
   asset: Joi.string().required(),
   owner: Joi.string().required(),
   price: Joi.string().required(),
-  mediaFile: Joi.string().required(),
+  mediaFile: Joi.string(),
 }).options({ abortEarly: false });
 
 export const advertiseValidationError = (req, res, next) => {
