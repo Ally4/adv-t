@@ -3,11 +3,11 @@
  */
 class ResponseService {
   /**
-       * @param  {integer} statusCode
-       * @param  {string} message
-       * @param  {object} data
-       * @returns {object} function to set a success response
-       */
+	 * @param  {integer} statusCode
+	 * @param  {string} message
+	 * @param  {object} data
+	 * @returns {object} function to set a success response
+	 */
   static setSuccess(statusCode, message, data) {
     this.statusCode = statusCode;
     this.message = message;
@@ -16,10 +16,10 @@ class ResponseService {
   }
 
   /**
-       * @param  {integer} statusCode
-       * @param  {string} message
-       * @returns {object} function to set response error
-       */
+	 * @param  {integer} statusCode
+	 * @param  {string} message
+	 * @returns {object} function to set response error
+	 */
   static setError(statusCode, message) {
     this.statusCode = statusCode;
     this.message = message;
@@ -27,9 +27,9 @@ class ResponseService {
   }
 
   /**
-       * @param  {object} res
-       * @returns {object} function to send a response
-       */
+	 * @param  {object} res
+	 * @returns {object} function to send a response
+	 */
   static send(res) {
     if (this.type === 'success') {
       return res.status(this.statusCode).json({

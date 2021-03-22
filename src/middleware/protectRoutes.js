@@ -16,18 +16,19 @@ exports.protect = async (req, res, next) => {
 
     const freshUser = await Model.User.findByPk(decoded.id);
 
-    if (!freshUser.isLoggedIn == true) {
+
+    if (freshUser.isLoggedIn === false) {
       return res.status(403).json({
-        message: 'login again',
+        message: 'login again1',
       });
     }
     req.user = freshUser;
   } catch (error) {
-    // return next(
-    //   res.status(403).json({
-    //     message: 'login again',
-    //   }),
-    // );
+    return next(
+      res.status(403).json({
+        message: 'login again2',
+      }),
+    );
   }
   next();
 };

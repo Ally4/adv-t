@@ -11,5 +11,10 @@
         "sourceType": "module"
     },
     "rules": {
+        "no-tabs":"off",
+        "radix":"off",
+        "import/prefer-default-export":"off",
+        "no-plusplus":"off",
+        "no-console":"off"
     }
 }

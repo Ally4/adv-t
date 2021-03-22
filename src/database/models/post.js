@@ -14,11 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Post.init({
-    asset: DataTypes.STRING,
+    assetName: DataTypes.STRING,
     owner: DataTypes.STRING,
     price: DataTypes.STRING,
-    mediaFile: DataTypes.STRING,
-    fileType: DataTypes.STRING
+    mediaFile: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Post',

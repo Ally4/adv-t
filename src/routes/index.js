@@ -4,6 +4,7 @@ import swaggerUi from 'swagger-ui-express';
 
 import userRoute from './authRouters';
 import advertiseRoute from './advertiseRouters';
+import messages from './messages';
 import swaggerOptions from '../utils/swagger';
 
 const router = express();
@@ -19,6 +20,7 @@ router.get('/', (req, res) => {
 
 router.use('/api/v1/auth', userRoute);
 router.use('/api/v1/advertise', advertiseRoute);
+router.use('/api/v1/message', messages);
 
 router.all('*', (req, res) => {
   res.status(404).json({

@@ -24,7 +24,6 @@ class userController {
         role,
         dateofbirth: req.body.dateofbirth,
         gender: req.body.gender,
-        isLoggedIn: false,
       };
 
       const { email } = req.body;
@@ -46,6 +45,7 @@ class userController {
         role: user.role,
         dateofbirth: user.dateofbirth,
         gender: user.gender,
+        isLoggedIn: false,
       };
       const toSend = {
         userEmail: `${email}`,
@@ -81,12 +81,13 @@ class userController {
         message: 'Your email or must password must be wrong',
       });
     }
-    const token = cryptionToken({ id: user.id });
 
     await User.update(
       { isLoggedIn: true },
       { where: { email: req.body.email } },
     );
+
+    const token = cryptionToken({ id: user.id, email: user.email, role: user.role, isLoggedIn: user.isLoggedIn });
 
     user.password = undefined;
     return res.status(200).json({
